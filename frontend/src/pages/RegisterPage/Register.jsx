@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import { FaUser, FaLock } from "react-icons/fa";
+import { MdOutlineAlternateEmail } from "react-icons/md";
+import "./Register.css";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -10,8 +13,8 @@ const Register = () => {
   const [role, setRole] = useState("employee");
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
+  const handleRegister = async (event) => {
+    event.preventDefault();
 
     try {
       await axios.post("http://localhost:5000/api/auth/register", {
@@ -30,35 +33,51 @@ const Register = () => {
   return (
     <div>
       <Navbar />
-      <h2>Register</h2>
-      <form onSubmit={handleRegister}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="employee">Employee</option>
-          <option value="admin">Admin</option>
-        </select>
-        <button type="submit">Register</button>
-      </form>
+      <div className="wrapper">
+        <form onSubmit={handleRegister}>
+          <h2>Register</h2>
+          <div className="input-box">
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <FaUser className="icon" />
+          </div>
+          <div className="input-box">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <MdOutlineAlternateEmail className="icon" />
+          </div>
+          <div className="input-box">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <FaLock className="icon" />
+          </div>
+          <select value={role} onChange={(e) => setRole(e.target.value)}>
+            <option value="employee">Employee</option>
+            <option value="admin">Admin</option>
+          </select>
+          <button type="submit">Sign Up</button>
+          <div className="register-link">
+            <p>
+              Already have an account? <Link to="/login">Login</Link>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
