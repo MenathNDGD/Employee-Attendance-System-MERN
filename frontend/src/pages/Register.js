@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -27,7 +28,8 @@ const Register = () => {
   };
 
   return (
-    <div className="register-container">
+    <div>
+      <Navbar />
       <h2>Register</h2>
       <form onSubmit={handleRegister}>
         <input
