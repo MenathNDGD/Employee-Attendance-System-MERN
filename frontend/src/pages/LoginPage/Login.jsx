@@ -56,7 +56,7 @@ function Login() {
             </label>
             <Link to="/forgot-password">Forgot password?</Link>
           </div>
-          <button type="submit">Login</button>
+          <button type="submit">Sign In</button>
           <div className="register-link">
             <p>
               Don't have an account? <Link to="/register">Register</Link>
