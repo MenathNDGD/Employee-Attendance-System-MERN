@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ function Login() {
 
   return (
     <div>
+      <Navbar />
       <h2>Login</h2>
       <input
         type="email"
