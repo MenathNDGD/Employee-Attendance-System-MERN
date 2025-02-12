@@ -21,6 +21,11 @@ nav ul {
   list-style-type: none;
 }
 
+nav ul li {
+  margin: 0 1rem;
+  display: flex;
+}
+
 nav ul li a {
   text-decoration: none;
   color: #fff;
@@ -34,8 +39,15 @@ nav ul li a.active {
   border-radius: 5px;
 }
 
+.nav-item {
+  display: flex;
+  align-items: center;
+}
+
 .nav-icn {
-  margin-right: 0.4rem;
+  margin-right: 8px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .btn {
@@ -62,6 +74,7 @@ nav ul li a.active {
     padding: 5rem 0;
     text-align: center;
     transition: all 0.5s ease-in;
+    z-index: 999;
   }
 
   nav ul.display {
@@ -79,5 +92,6 @@ nav ul li a.active {
     top: 0.5rem;
     left: 14rem;
     margin: 25px;
+    z-index: 1000;
   }
 }
