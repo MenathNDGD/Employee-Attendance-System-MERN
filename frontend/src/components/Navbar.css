@@ -1,0 +1,79 @@
+.container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+header {
+  background-color: rgba(51, 0, 96, 0.4);
+  padding: 2rem 0;
+}
+
+.menus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem 0.6rem;
+}
+
+nav ul li a.active {
+  background-color: #fff;
+  color: #000;
+  border-radius: 5px;
+}
+
+.btn {
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    display: block;
+  }
+
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: 300px;
+    height: 100vh;
+    top: 5px;
+    right: -100%;
+    background-color: rgba(51, 0, 96, 0.4);
+    padding: 5rem 0;
+    text-align: center;
+    transition: all 0.5s ease-in;
+  }
+
+  nav ul.display {
+    right: 0;
+    transition: all 0.9s ease-in-out;
+  }
+
+  nav ul a {
+    display: block;
+    margin: 10px;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 0.5rem;
+    left: 14rem;
+    margin: 25px;
+  }
+}
