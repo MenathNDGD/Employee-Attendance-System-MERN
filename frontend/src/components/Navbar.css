@@ -6,8 +6,8 @@
 }
 
 header {
-  background-color: rgba(51, 0, 96, 0.4);
-  padding: 2rem 0;
+  background-color: rgba(0, 28, 121, 0.4);
+  padding: 1.5rem 0;
 }
 
 .menus {
@@ -25,13 +25,17 @@ nav ul li a {
   text-decoration: none;
   color: #fff;
   font-size: 1rem;
-  padding: 0.5rem 0.6rem;
+  padding: 0.5rem 2rem;
 }
 
 nav ul li a.active {
   background-color: #fff;
   color: #000;
   border-radius: 5px;
+}
+
+.nav-icn {
+  margin-right: 0.4rem;
 }
 
 .btn {
@@ -54,7 +58,7 @@ nav ul li a.active {
     height: 100vh;
     top: 5px;
     right: -100%;
-    background-color: rgba(51, 0, 96, 0.4);
+    background-color: rgba(0, 28, 121, 0.4);
     padding: 5rem 0;
     text-align: center;
     transition: all 0.5s ease-in;
