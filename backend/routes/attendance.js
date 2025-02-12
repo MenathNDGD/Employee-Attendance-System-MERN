@@ -6,7 +6,7 @@ router.post("/", async (req, res) => {
   const { userId, status } = req.body;
   const attendance = new Attendance({ userId, status });
   await attendance.save();
-  
+
   res.json({ message: "Attendance marked" });
 });
 
