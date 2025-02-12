@@ -18,13 +18,19 @@ const Navbar = () => {
                 <i className="fas fa-times close-btn"></i>
               </div>
               <li>
-                <NavLink to={"/"}>Dashboard</NavLink>
+                <NavLink to={"/"}>
+                  <i className="fas fa-tachometer-alt nav-icn"></i> Dashboard
+                </NavLink>
               </li>
               <li>
-                <NavLink to={"/login"}>Login</NavLink>
+                <NavLink to={"/login"}>
+                  <i className="fas fa-sign-in-alt nav-icn"></i> Login
+                </NavLink>
               </li>
               <li>
-                <NavLink to={"/register"}>Register</NavLink>
+                <NavLink to={"/register"}>
+                  <i className="fas fa-user-plus nav-icn"></i> Register
+                </NavLink>
               </li>
             </ul>
           </nav>
