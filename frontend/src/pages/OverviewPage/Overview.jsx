@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import Navbar from "../../components/Navbar";
 
 function Overview() {
   const [attendance, setAttendance] = useState([]);
@@ -19,7 +18,6 @@ function Overview() {
 
   return (
     <div>
-      <Navbar />
       <h2>Attendance Records</h2>
       <ul>
         {attendance.map((record) => (
