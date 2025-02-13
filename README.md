@@ -226,29 +226,29 @@ localStorage.removeItem("token");
 
 ## <a name="contributing">✨ Contributing</a>
 
-## 1. Fork the repo.
+### 1. Fork the repo.
 
-## 2. Create a new branch:
+### 2. Create a new branch:
 
 ```bash
 git checkout -b feature-name
 ```
 
-## 3. Make your changes.
+### 3. Make your changes.
 
-## 4. Commit your changes:
+### 4. Commit your changes:
 
 ```bash
 git commit -m 'Add some feature'
 ```
 
-## 5. Push to the branch:
+### 5. Push to the branch:
 
 ```bash
 git push origin feature-name
 ```
 
-## 6. Open a Pull Request.
+### 6. Open a Pull Request.
 
 **Feel free to tailor these contents according to your specific preferences or any additional details you want to include!**
 
