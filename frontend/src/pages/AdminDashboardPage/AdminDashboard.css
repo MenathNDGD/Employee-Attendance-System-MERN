@@ -57,9 +57,9 @@
   color: #fff;
 }
 
-.input-select option::placeholder,
-.input-year option::placeholder {
-  color: #fff;
+select option,
+select option {
+  color: #333;
 }
 
 .btn-fetch {
