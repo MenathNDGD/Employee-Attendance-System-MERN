@@ -1,6 +1,8 @@
 .admin-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .admin-container h3 {
@@ -10,7 +12,7 @@
 }
 
 .admin-dashboard {
-  max-width: 900px;
+  max-width: 1200px;
   width: 100%;
   margin: 50px auto;
   border-radius: 8px;
@@ -22,9 +24,15 @@
 
 .form-group {
   display: flex;
-  flex-wrap: wrap;
   gap: 20px;
-  justify-content: space-between;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.form-group-btn {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
 }
 
 .form-group select {
@@ -45,15 +53,16 @@
   cursor: pointer;
 }
 
-.input-select,
-.input-year {
-  width: 48%;
+.input-select {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
   background: transparent;
   outline: none;
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 40px;
   font-size: 16px;
-  padding: 20px 45px 20px 20px;
+  padding: 15px 20px 15px 20px;
   color: #fff;
 }
 
@@ -63,7 +72,7 @@ select option {
 }
 
 .btn-fetch {
-  width: 100%;
+  width: 80%;
   height: 45px;
   border: none;
   outline: none;
@@ -97,4 +106,49 @@ select option {
 
 .attendance-list li:last-child {
   border-bottom: none;
+}
+
+@media (max-width: 992px) {
+  .admin-dashboard {
+    padding: 20px 30px;
+  }
+
+  .form-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .form-group select,
+  .input-select {
+    width: 100%;
+  }
+
+  .btn-fetch {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .admin-dashboard {
+    padding: 15px 20px;
+  }
+
+  .admin-container h3 {
+    font-size: 20px;
+  }
+
+  .form-group {
+    gap: 10px;
+  }
+
+  .input-select,
+  .form-group select {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  .btn-fetch {
+    font-size: 14px;
+    height: 40px;
+  }
 }
