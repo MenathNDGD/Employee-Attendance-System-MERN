@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar";
 import { FaUser, FaLock } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import "./Register.css";
@@ -32,7 +31,6 @@ const Register = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="wrapper">
         <form onSubmit={handleRegister}>
           <h2>Register</h2>
