@@ -18,7 +18,11 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) return navigate("/");
+    if (!token) {
+      console.error("No token found in localStorage");
+      navigate("/login");
+      return;
+    }
 
     const user = jwtDecode(token);
     if (user.role !== "admin") {
