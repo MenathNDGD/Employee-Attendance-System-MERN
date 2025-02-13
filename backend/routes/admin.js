@@ -16,32 +16,46 @@ router.put("/user/:id", verifyAdmin, async (req, res) => {
 });
 
 router.get("/attendance", verifyAdmin, async (req, res) => {
-  const { userId, month, year } = req.query;
-  const attendance = await Attendance.find({
-    userId,
-    date: {
-      $gte: new Date(`${year}-${month}-01`),
-      $lt: new Date(`${year}-${month}-31`),
-    },
-  });
-  res.json(attendance);
+  const { userId, date } = req.query;
+  try {
+    const attendance = await Attendance.find({ userId, date });
+    res.json(attendance);
+  } catch (err) {
+    res.status(500).json({ message: "Server Error" });
+  }
 });
 
 router.post("/attendance", verifyAdmin, async (req, res) => {
   const { userId, date, status } = req.body;
-  const newAttendance = new Attendance({ userId, date, status });
-  await newAttendance.save();
-  res.json({ message: "Attendance added" });
+  try {
+    const existingRecord = await Attendance.findOne({ userId, date });
+
+    if (existingRecord) {
+      existingRecord.status = status;
+      await existingRecord.save();
+      return res.json({ message: "Attendance updated" });
+    }
+
+    const newAttendance = new Attendance({ userId, date, status });
+    await newAttendance.save();
+    res.json({ message: "Attendance added" });
+  } catch (err) {
+    res.status(500).json({ message: "Server Error" });
+  }
 });
 
-router.put("/attendance/:id", verifyAdmin, async (req, res) => {
-  await Attendance.findByIdAndUpdate(req.params.id, req.body);
-  res.json({ message: "Attendance updated" });
-});
+// router.put("/attendance/:id", verifyAdmin, async (req, res) => {
+//   await Attendance.findByIdAndUpdate(req.params.id, req.body);
+//   res.json({ message: "Attendance updated" });
+// });
 
 router.delete("/attendance/:id", verifyAdmin, async (req, res) => {
-  await Attendance.findByIdAndDelete(req.params.id);
-  res.json({ message: "Attendance deleted" });
+  try {
+    await Attendance.findByIdAndDelete(req.params.id);
+    res.json({ message: "Attendance deleted" });
+  } catch (err) {
+    res.status(500).json({ message: "Server Error" });
+  }
 });
 
 module.exports = router;
