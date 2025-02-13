@@ -94,6 +94,7 @@ select option {
 .btn-delete {
   width: auto;
   padding: 5px 10px;
+  margin-left: 1rem;
   border: none;
   outline: none;
   border-radius: 40px;
@@ -111,19 +112,40 @@ select option {
 }
 
 .attendance-list {
-  padding: 0;
-  list-style-type: none;
+  max-height: 270px;
+  overflow-y: auto;
+  padding: 10px 10px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
 }
 
 .attendance-list li {
   font-size: 16px;
   color: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 10px 0;
+  padding: 10px 5px;
 }
 
 .attendance-list li:last-child {
   border-bottom: none;
+}
+
+.attendance-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.attendance-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.attendance-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.attendance-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .no-records {
