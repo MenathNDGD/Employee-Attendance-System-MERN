@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const AttendanceSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  date: { type: Date, default: Date.now },
+  date: { type: String, required: true },
   status: {
     type: String,
     enum: ["Present", "Absent", "Leave"],
