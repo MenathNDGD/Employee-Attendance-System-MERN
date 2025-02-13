@@ -13,6 +13,7 @@ const AdminDashboard = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [status, setStatus] = useState("Present");
   const [attendance, setAttendance] = useState([]);
+  const [showAttendance, setShowAttendance] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -68,6 +69,22 @@ const AdminDashboard = () => {
     }
   };
 
+  const fetchAllAttendance = () => {
+    axios
+      .get("http://localhost:5000/api/admin/attendance/all", {
+        params: { userId: selectedUser },
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then(({ data }) => {
+        setAttendance(data);
+        setShowAttendance(true);
+      })
+      .catch((err) => {
+        console.error("Error fetching attendance:", err.response?.data);
+        alert("Failed to fetch attendance records");
+      });
+  };
+
   const deleteAttendance = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/api/admin/attendance/${id}`, {
@@ -96,6 +113,9 @@ const AdminDashboard = () => {
 
               const user = users.find((user) => user._id === selectedId);
               setSelectedUserName(user ? user.name : "");
+
+              setAttendance([]);
+              setShowAttendance(false);
             }}
           >
             <option value="">Select User</option>
@@ -128,28 +148,34 @@ const AdminDashboard = () => {
             Save Attendance
           </button>
 
-          <button className="btn-fetch" onClick={fetchAttendance}>
+          <button className="btn-fetch" onClick={fetchAllAttendance}>
             View Attendance
           </button>
         </div>
 
         <h3>
-          Attendance Records for {selectedDate.toISOString().split("T")[0]} of{" "}
-          {selectedUserName || "Selected User"}
+          All Attendance Records for {selectedUserName || "Selected User"}
         </h3>
-        <ul className="attendance-list">
-          {attendance.map((record) => (
-            <li key={record._id}>
-              {record.date} - {record.status}{" "}
-              <button
-                className="btn-delete"
-                onClick={() => deleteAttendance(record._id)}
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
+
+        {showAttendance && (
+          <ul className="attendance-list">
+            {attendance.length === 0 ? (
+              <li className="no-records">No attendance records found!</li>
+            ) : (
+              attendance.map((record) => (
+                <li key={record._id}>
+                  {record.date} - {record.status}{" "}
+                  <button
+                    className="btn-delete"
+                    onClick={() => deleteAttendance(record._id)}
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))
+            )}
+          </ul>
+        )}
       </div>
     </div>
   );
