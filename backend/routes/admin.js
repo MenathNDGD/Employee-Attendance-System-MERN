@@ -44,10 +44,17 @@ router.post("/attendance", verifyAdmin, async (req, res) => {
   }
 });
 
-// router.put("/attendance/:id", verifyAdmin, async (req, res) => {
-//   await Attendance.findByIdAndUpdate(req.params.id, req.body);
-//   res.json({ message: "Attendance updated" });
-// });
+router.get("/attendance/all", verifyAdmin, async (req, res) => {
+  const { userId } = req.query;
+  try {
+    const attendanceRecords = await Attendance.find({ userId }).sort({
+      date: -1,
+    });
+    res.json(attendanceRecords);
+  } catch (err) {
+    res.status(500).json({ message: "Server Error" });
+  }
+});
 
 router.delete("/attendance/:id", verifyAdmin, async (req, res) => {
   try {
