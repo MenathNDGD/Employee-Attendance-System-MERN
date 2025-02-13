@@ -36,12 +36,18 @@ nav ul li a {
 nav ul li a.active {
   background-color: #fff;
   color: #000;
+  font-weight: 500;
   border-radius: 5px;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
+}
+
+.nav-item:hover {
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
 }
 
 .nav-icn {
