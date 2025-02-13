@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
-  const [attendance, setAttendance] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
-  const [selectedMonth, setSelectedMonth] = useState("01");
-  const [selectedYear, setSelectedYear] = useState("2025");
+  const [selectedUserName, setSelectedUserName] = useState("");
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [status, setStatus] = useState("Present");
+  const [attendance, setAttendance] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,21 +37,66 @@ const AdminDashboard = () => {
       .get("http://localhost:5000/api/admin/attendance", {
         params: {
           userId: selectedUser,
-          month: selectedMonth,
-          year: selectedYear,
+          date: selectedDate.toISOString().split("T")[0],
         },
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then(({ data }) => setAttendance(data));
   };
 
+  const addAttendance = async () => {
+    try {
+      await axios.post(
+        "http://localhost:5000/api/admin/attendance",
+        {
+          userId: selectedUser,
+          date: selectedDate.toISOString().split("T")[0],
+          status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      alert("Attendance saved!");
+      fetchAttendance();
+    } catch (error) {
+      console.error("Error saving attendance:", error.response?.data);
+      alert("Failed to save attendance");
+    }
+  };
+
+  const deleteAttendance = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/admin/attendance/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      alert("Attendance deleted!");
+      fetchAttendance();
+    } catch (error) {
+      console.error("Error deleting attendance:", error.response?.data);
+    }
+  };
+
   return (
     <div className="admin-container">
       <div className="admin-dashboard">
+        <h2>Admin Dashboard - Day by Day Attendance</h2>
+
         <div className="form-group">
           <select
             className="input-select"
-            onChange={(e) => setSelectedUser(e.target.value)}
+            onChange={(e) => {
+              const selectedId = e.target.value;
+              setSelectedUser(selectedId);
+
+              const user = users.find((user) => user._id === selectedId);
+              setSelectedUserName(user ? user.name : "");
+            }}
           >
             <option value="">Select User</option>
             {users.map((user) => (
@@ -58,42 +106,47 @@ const AdminDashboard = () => {
             ))}
           </select>
 
-          <select
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            dateFormat="YYYY MMMM dd"
             className="input-select"
-            onChange={(e) => setSelectedMonth(e.target.value)}
-          >
-            <option value="01">January</option>
-            <option value="02">February</option>
-            <option value="03">March</option>
-            <option value="04">April</option>
-            <option value="05">May</option>
-            <option value="06">June</option>
-            <option value="07">July</option>
-            <option value="08">August</option>
-            <option value="09">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-          </select>
-
-          <input
-            type="number"
-            className="input-year"
-            placeholder="Year"
-            value={selectedYear}
-            onChange={(e) => setSelectedYear(e.target.value)}
           />
 
+          <select
+            className="input-select"
+            onChange={(e) => setStatus(e.target.value)}
+          >
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+            <option value="Leave">Leave</option>
+          </select>
+        </div>
+
+        <div className="form-group-btn">
+          <button className="btn-fetch" onClick={addAttendance}>
+            Save Attendance
+          </button>
+
           <button className="btn-fetch" onClick={fetchAttendance}>
-            Fetch Attendance
+            View Attendance
           </button>
         </div>
 
-        <h3>Attendance Records</h3>
+        <h3>
+          Attendance Records for {selectedDate.toISOString().split("T")[0]} of{" "}
+          {selectedUserName || "Selected User"}
+        </h3>
         <ul className="attendance-list">
           {attendance.map((record) => (
             <li key={record._id}>
-              {new Date(record.date).toDateString()} - {record.status}
+              {record.date} - {record.status}{" "}
+              <button
+                className="btn-delete"
+                onClick={() => deleteAttendance(record._id)}
+              >
+                Delete
+              </button>
             </li>
           ))}
         </ul>
