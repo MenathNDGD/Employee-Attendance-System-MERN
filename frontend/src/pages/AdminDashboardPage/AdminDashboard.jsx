@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar";
 import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
@@ -45,7 +44,6 @@ const AdminDashboard = () => {
 
   return (
     <div className="admin-container">
-      <Navbar />
       <div className="admin-dashboard">
         <div className="form-group">
           <select
