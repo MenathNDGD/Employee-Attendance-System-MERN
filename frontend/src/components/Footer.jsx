@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaGithub, FaTwitter, FaLinkedin, FaFacebook } from "react-icons/fa";
 import LogoFooter from "../assets/logo.svg";
 import "./Footer.css";
@@ -11,7 +12,9 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-section">
           <div className="logo-section">
-            <img src={LogoFooter} alt="LogoFooter" />
+            <Link to={"/"}>
+              <img src={LogoFooter} alt="LogoFooter" />
+            </Link>
           </div>
           <p className="footer-description">
             &copy; {currentYear} All rights reserved.
