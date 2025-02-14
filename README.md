@@ -96,30 +96,30 @@ Employee-Attendance-System-MERN/
 │   ├── .env.example                    # Examples of Environment Variables
 │   ├── .env.local                      # Environment Variables for backend
 │   ├── server.js                       # Express Server Configuration
-└── frontend/                           # Frontend Directory (React.js)
-    ├── public/                         # Public Assets and Index.html
-    ├── src/                            # Source Code Folder
-    │   ├── assets/                     # All Project Assets
-    │   ├── components/                 # Reusable Components
-    │   │   ├── Navbar.css              # Styles for Navbar Component
-    │   │   └── Navbar.jsx              # Navigation Bar Component
-    │   ├── pages/                      # React Pages (Screens)
-    │   │   ├── AdminDashboardPage/     # Admin Dashboard for Attendance Management
-    │   │   │   ├── AdminDashboard.css  # CSS Styles for Admin Dashboard
-    │   │   │   └── AdminDashboard.jsx  # Admin Dashboard React Component
-    │   │   ├── LoginPage/              # USer Login for Attendance Management
-    │   │   │   ├── Login.css           # CSS Styles for User Login
-    │   │   │   └── Login.jsx           # User Login React Component
-    │   │   ├── OverviewPage/           # Attendance Details Overview
-    │   │   │   ├── Overview.css        # CSS Styles for Attendance Overview
-    │   │   │   └── Overview.jsx        # Attendance Details Overview React Component
-    │   │   ├── RegisterPage/           # User Registration Page
-    │   │   │   ├── Register.css        # CSS Styles for User Registration
-    │   │   │   └── Register.jsx        # User Registration React Component
-    │   ├── App.js                      # Main React Component
-    ├── index.js                        # React DOM Renderer
-    └── index.css                       # Global Styles
-└── nonRelatedAssets/                   # Assets for the GitHub Repo (Non-related to the Project Assets)
+├── frontend/                           # Frontend Directory (React.js)
+│   ├── public/                         # Public Assets and Index.html
+│   ├── src/                            # Source Code Folder
+│   │   ├── assets/                     # All Project Assets
+│   │   ├── components/                 # Reusable Components
+│   │   │   ├── Navbar.css              # Styles for Navbar Component
+│   │   │   └── Navbar.jsx              # Navigation Bar Component
+│   │   ├── pages/                      # React Pages (Screens)
+│   │   │   ├── AdminDashboardPage/     # Admin Dashboard for Attendance Management
+│   │   │   │   ├── AdminDashboard.css  # CSS Styles for Admin Dashboard
+│   │   │   │   └── AdminDashboard.jsx  # Admin Dashboard React Component
+│   │   │   ├── LoginPage/              # USer Login for Attendance Management
+│   │   │   │   ├── Login.css           # CSS Styles for User Login
+│   │   │   │   └── Login.jsx           # User Login React Component
+│   │   │   ├── OverviewPage/           # Attendance Details Overview
+│   │   │   │   ├── Overview.css        # CSS Styles for Attendance Overview
+│   │   │   │   └── Overview.jsx        # Attendance Details Overview React Component
+│   │   │   ├── RegisterPage/           # User Registration Page
+│   │   │   │   ├── Register.css        # CSS Styles for User Registration
+│   │   │   │   └── Register.jsx        # User Registration React Component
+│   │   ├── App.js                      # Main React Component
+│   ├── index.js                        # React DOM Renderer
+│   └── index.css                       # Global Styles
+└── nonRelatedAssets/                   # Assets for the GitHub Repo (Non-related to the Project)
 ```
 
 ## <a name="quick-start">🤸 Quick Start</a>
