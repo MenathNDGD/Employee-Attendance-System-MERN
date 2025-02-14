@@ -95,7 +95,7 @@ Employee-Attendance-System-MERN/
 │   │   └── auth.js                     # Authentication Routes
 │   ├── .env.example                    # Examples of Environment Variables
 │   ├── .env.local                      # Environment Variables for backend
-│   ├── server.js                       # Express Server Configuration
+│   └── server.js                       # Express Server Configuration
 ├── frontend/                           # Frontend Directory (React.js)
 │   ├── public/                         # Public Assets and Index.html
 │   ├── src/                            # Source Code Folder
@@ -113,12 +113,14 @@ Employee-Attendance-System-MERN/
 │   │   │   ├── OverviewPage/           # Attendance Details Overview
 │   │   │   │   ├── Overview.css        # CSS Styles for Attendance Overview
 │   │   │   │   └── Overview.jsx        # Attendance Details Overview React Component
-│   │   │   ├── RegisterPage/           # User Registration Page
-│   │   │   │   ├── Register.css        # CSS Styles for User Registration
-│   │   │   │   └── Register.jsx        # User Registration React Component
+│   │   │   └── RegisterPage/           # User Registration Page
+│   │   │       ├── Register.css        # CSS Styles for User Registration
+│   │   │       └── Register.jsx        # User Registration React Component
 │   │   ├── App.js                      # Main React Component
-│   ├── index.js                        # React DOM Renderer
-│   └── index.css                       # Global Styles
+│   │   ├── index.css                   # Global Styles
+│   │   └── index.js                    # React DOM Renderer  
+│   ├── package-lock.json               # Packages & Dependencies                       
+│   └── package.json                    # Project Installed Packages & Dependencies                      
 └── nonRelatedAssets/                   # Assets for the GitHub Repo (Non-related to the Project)
 ```
 
