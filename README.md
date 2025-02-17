@@ -257,5 +257,3 @@ git push origin feature-name
 - **Contributions:** Contributions are welcome! Feel free to fork the repository, make changes, and submit a pull request.
 
 - **Feedback:** If you have any feedback or suggestions, I would love to hear from you. Reach out via the contact form on the portfolio or open an issue on GitHub.
-
-- **Live Demo:** [View the live version of my portfolio](https://menath-portfolio.vercel.app/) to see it in action!
