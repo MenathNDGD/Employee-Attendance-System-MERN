@@ -65,4 +65,43 @@ router.delete("/attendance/:id", verifyAdmin, async (req, res) => {
   }
 });
 
+router.delete("/users/:id", async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    const user = await User.findByIdAndDelete(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    await Attendance.deleteMany({ userId });
+
+    res.json({
+      message: "User and their attendance records deleted successfully!",
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Failed to delete user and attendance records" });
+  }
+});
+
+router.put("/users/:id/role", async (req, res) => {
+  const { role } = req.body;
+  if (!["admin", "employee"].includes(role)) {
+    return res.status(400).json({ error: "Invalid role" });
+  }
+
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { role },
+      { new: true }
+    );
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update role" });
+  }
+});
+
 module.exports = router;
