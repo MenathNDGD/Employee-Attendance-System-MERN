@@ -63,6 +63,23 @@ nav ul li a.active {
   display: none;
 }
 
+.logout-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+}
+
+.logout-btn:hover {
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
+}
+
 @media (max-width: 768px) {
   .btn {
     display: block;
