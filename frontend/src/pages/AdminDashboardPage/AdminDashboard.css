@@ -5,10 +5,13 @@
   justify-content: center;
 }
 
-.admin-container h3 {
+h3 {
   font-size: 24px;
   color: #fff;
-  margin-top: 2%;
+}
+
+.attendance-heading {
+  margin-top: 20px;
 }
 
 .admin-dashboard {
@@ -35,7 +38,8 @@
   gap: 80px;
 }
 
-.form-group select {
+.form-group select,
+.input-select {
   height: 50px;
   background: transparent;
   outline: none;
@@ -53,22 +57,13 @@
   cursor: pointer;
 }
 
-.input-select {
-  flex: 1;
-  min-width: 0;
-  box-sizing: border-box;
-  background: transparent;
-  outline: none;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 40px;
-  font-size: 16px;
-  padding: 15px 20px 15px 20px;
-  color: #fff;
+.input-select option {
+  padding: 10px 30px;
 }
 
-select option,
 select option {
   color: #333;
+  background: #fff;
 }
 
 .btn-fetch {
@@ -100,15 +95,40 @@ select option {
   border-radius: 40px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  color: #333;
+  color: #fff;
   font-weight: 700;
   font-size: 15px;
+  background: #ff4b5c;
 }
 
 .btn-delete:hover {
-  background: #ff0000;
-  color: #fff;
+  background: #ff1e37;
   transition: all 0.3s ease;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.user-item span {
+  flex: 1;
+}
+
+.btn-delete {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 .attendance-list {
@@ -154,6 +174,51 @@ select option {
   margin-top: 20px;
 }
 
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.user-table th,
+.user-table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+}
+
+.user-table th {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: bold;
+}
+
+.user-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.role-select {
+  height: 40px;
+  background: transparent;
+  color: #fff;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  font-size: 14px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.role-select option {
+  color: #333;
+  background: #fff;
+}
+
 @media (max-width: 992px) {
   .admin-dashboard {
     padding: 20px 30px;
@@ -162,11 +227,6 @@ select option {
   .form-group {
     flex-direction: column;
     gap: 15px;
-  }
-
-  .form-group select,
-  .input-select {
-    width: 100%;
   }
 
   .btn-fetch {
@@ -179,22 +239,58 @@ select option {
     padding: 15px 20px;
   }
 
-  .admin-container h3 {
-    font-size: 20px;
-  }
-
   .form-group {
     gap: 10px;
-  }
-
-  .input-select,
-  .form-group select {
-    font-size: 14px;
-    padding: 10px 15px;
   }
 
   .btn-fetch {
     font-size: 14px;
     height: 40px;
+  }
+}
+
+@media (max-width: 992px) {
+  .user-management {
+    padding: 0 15px;
+  }
+
+  .user-table th,
+  .user-table td {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .role-select {
+    height: 35px;
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+
+  .btn-delete {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 576px) {
+  .user-management h3 {
+    font-size: 20px;
+  }
+
+  .user-table th,
+  .user-table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .role-select {
+    height: 30px;
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+
+  .btn-delete {
+    padding: 5px 10px;
+    font-size: 12px;
   }
 }
