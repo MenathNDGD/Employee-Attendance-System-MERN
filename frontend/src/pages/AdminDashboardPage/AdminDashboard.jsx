@@ -19,7 +19,6 @@ const AdminDashboard = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      console.error("No token found in localStorage");
       navigate("/login");
       return;
     }
@@ -30,12 +29,49 @@ const AdminDashboard = () => {
       return navigate("/");
     }
 
+    fetchUsers();
+  }, [navigate]);
+
+  const fetchUsers = () => {
     axios
       .get("http://localhost:5000/api/admin/users", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
-      .then(({ data }) => setUsers(data));
-  }, [navigate]);
+      .then(({ data }) => setUsers(data))
+      .catch((err) => console.error("Error fetching users:", err));
+  };
+
+  const deleteUser = async (userId) => {
+    if (!window.confirm("Are you sure you want to delete this user?")) return;
+
+    try {
+      await axios.delete(`http://localhost:5000/api/admin/users/${userId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      alert("User and their attendance records deleted successfully!");
+      fetchUsers();
+    } catch (error) {
+      console.error("Error deleting user:", error.response?.data);
+      alert("Failed to delete user.");
+    }
+  };
+
+  const changeUserRole = async (userId, newRole) => {
+    try {
+      await axios.put(
+        `http://localhost:5000/api/admin/users/${userId}/role`,
+        { role: newRole },
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+      alert(`User role updated to ${newRole}!`);
+      fetchUsers();
+    } catch (error) {
+      console.error("Error updating role:", error.response?.data);
+      alert("Failed to update role.");
+    }
+  };
 
   const fetchAttendance = () => {
     axios
@@ -106,8 +142,37 @@ const AdminDashboard = () => {
   return (
     <div className="admin-container">
       <div className="admin-dashboard">
-        <h2>Admin Dashboard - Day by Day Attendance</h2>
+        <h3>Manage Users</h3>
+        {users && (
+          <ul className="user-list">
+            {users.length === 0 ? (
+              <li className="no-records">No users found!</li>
+            ) : (
+              users.map((user) => (
+                <li key={user._id} className="user-item">
+                  <span className="user-name">{user.name}</span>
+                  <span className="user-email">{user.email}</span>
+                  <select
+                    value={user.role}
+                    onChange={(e) => changeUserRole(user._id, e.target.value)}
+                    className="input-select"
+                  >
+                    <option value="employee">Employee</option>
+                    <option value="admin">Admin</option>
+                  </select>
+                  <button
+                    className="btn-delete"
+                    onClick={() => deleteUser(user._id)}
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))
+            )}
+          </ul>
+        )}
 
+        <h3>Manage Attendance</h3>
         <div className="form-group">
           <select
             className="input-select"
@@ -157,7 +222,7 @@ const AdminDashboard = () => {
           </button>
         </div>
 
-        <h3>
+        <h3 className="attendance-heading">
           All Attendance Records for {selectedUserName || "Selected User"}
         </h3>
 
