@@ -7,6 +7,7 @@ import "./Overview.css";
 
 function Overview() {
   const [summary, setSummary] = useState({});
+  const [attendanceDetails, setAttendanceDetails] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState(moment().format("MM"));
   const [selectedYear, setSelectedYear] = useState(moment().format("YYYY"));
   const [loading, setLoading] = useState(true);
@@ -20,14 +21,11 @@ function Overview() {
       return;
     }
 
-    try {
-      const userId = jwtDecode(token).id;
+    const fetchAttendanceSummary = (userId) => {
+      setLoading(true);
       axios
         .get(`http://localhost:5000/api/attendance/summary/${userId}`, {
-          params: {
-            year: selectedYear,
-            month: selectedMonth,
-          },
+          params: { year: selectedYear, month: selectedMonth },
         })
         .then(({ data }) => {
           setSummary(data);
@@ -38,16 +36,64 @@ function Overview() {
           alert("Failed to fetch attendance data. Please try again later.");
           setLoading(false);
         });
+    };
+
+    const fetchDailyAttendance = (userId) => {
+      setLoading(true);
+      console.log(
+        `Fetching attendance for UserID: ${userId}, Year: ${selectedYear}, Month: ${selectedMonth}`
+      );
+
+      axios
+        .get(`http://localhost:5000/api/attendance/details/${userId}`, {
+          params: { year: selectedYear, month: selectedMonth },
+        })
+        .then(({ data }) => {
+          console.log("Fetched Attendance Data:", data);
+          setAttendanceDetails(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error(
+            "Error fetching daily attendance:",
+            err.response?.data || err.message
+          );
+          setLoading(false);
+        });
+    };
+
+    try {
+      const userId = jwtDecode(token).id;
+      fetchAttendanceSummary(userId);
+      fetchDailyAttendance(userId);
     } catch (err) {
       console.error("Invalid token:", err);
       navigate("/login");
     }
   }, [selectedMonth, selectedYear, navigate]);
 
+  const getAllDaysOfMonth = () => {
+    const daysInMonth = moment(
+      `${selectedYear}-${selectedMonth}`,
+      "YYYY-MM"
+    ).daysInMonth();
+
+    return Array.from({ length: daysInMonth }, (_, index) => {
+      const date = moment(
+        `${selectedYear}-${selectedMonth}-${index + 1}`,
+        "YYYY-MM-DD"
+      ).format("YYYY-MM-DD");
+
+      const record = attendanceDetails.find(
+        (att) => moment(att.date).format("YYYY-MM-DD") === date
+      );
+
+      return { date, status: record ? record.status : "No Record" };
+    });
+  };
+
   return (
     <div className="overview-container">
-      <h2>Attendance Overview</h2>
-
       <div className="filter-container">
         <label>Year:</label>
         <select
@@ -101,6 +147,32 @@ function Overview() {
               <td>{summary.absentDays || 0}</td>
               <td>{summary.leaveDays || 0}</td>
             </tr>
+          </tbody>
+        </table>
+      )}
+
+      {loading ? (
+        <p>Loading...</p>
+      ) : attendanceDetails.length === 0 ? (
+        <p className="no-records">
+          No attendance records found for{" "}
+          {moment(selectedMonth, "MM").format("MMMM")} {selectedYear}.
+        </p>
+      ) : (
+        <table className="attendance-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {getAllDaysOfMonth().map((record, index) => (
+              <tr key={index}>
+                <td>{moment(record.date).format("YYYY-MM-DD")}</td>
+                <td>{record.status}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       )}
