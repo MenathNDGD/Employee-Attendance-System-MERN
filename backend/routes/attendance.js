@@ -64,15 +64,47 @@ router.get("/summary/:userId", async (req, res) => {
     res.status(500).json({ message: "Server Error", error: err.message });
   }
 });
+//   try {
+//     const { userId } = req.params;
+//     const { year, month } = req.query;
 
-router.get("/attendance/details/:userId", async (req, res) => {
+//     console.log(
+//       `Fetching attendance for UserID: ${userId}, Year: ${year}, Month: ${month}`
+//     );
+
+//     if (!userId || !year || !month) {
+//       return res
+//         .status(400)
+//         .json({ error: "Missing required query parameters" });
+//     }
+
+//     const startDate = new Date(`${year}-${month}-01T00:00:00.000Z`);
+//     const endDate = new Date(
+//       `${year}-${(parseInt(month) + 1)
+//         .toString()
+//         .padStart(2, "0")}-01T00:00:00.000Z`
+//     );
+
+//     console.log("Querying MongoDB from:", startDate, "to:", endDate);
+
+//     const records = await Attendance.find({
+//       userId,
+//       date: { $gte: startDate, $lt: endDate },
+//     }).sort({ date: 1 });
+
+//     console.log("Fetched Records:", records);
+
+//     res.json(records);
+//   } catch (error) {
+//     console.error("Server Error Fetching Attendance:", error);
+//     res.status(500).json({ error: "Failed to fetch attendance records" });
+//   }
+// });
+
+router.get("/details/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
     const { year, month } = req.query;
-
-    console.log(
-      `Fetching attendance for UserID: ${userId}, Year: ${year}, Month: ${month}`
-    );
 
     if (!userId || !year || !month) {
       return res
@@ -80,14 +112,17 @@ router.get("/attendance/details/:userId", async (req, res) => {
         .json({ error: "Missing required query parameters" });
     }
 
-    const startDate = new Date(`${year}-${month}-01T00:00:00.000Z`);
-    const endDate = new Date(
-      `${year}-${(parseInt(month) + 1)
-        .toString()
-        .padStart(2, "0")}-01T00:00:00.000Z`
-    );
+    const y = parseInt(year, 10);
+    const m = parseInt(month, 10);
 
-    console.log("Querying MongoDB from:", startDate, "to:", endDate);
+    if (isNaN(y) || isNaN(m) || m < 1 || m > 12) {
+      return res.status(400).json({ error: "Invalid year or month format" });
+    }
+
+    const startDate = `${y}-${String(m).padStart(2, "0")}-01`;
+    const endDate = `${y}-${String(m + 1).padStart(2, "0")}-01`;
+
+    console.log(`Querying MongoDB from: ${startDate} to ${endDate}`);
 
     const records = await Attendance.find({
       userId,
