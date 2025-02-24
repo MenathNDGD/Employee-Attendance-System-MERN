@@ -151,31 +151,26 @@ function Overview() {
         </table>
       )}
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : attendanceDetails.length === 0 ? (
-        <p className="no-records">
-          No attendance records found for{" "}
-          {moment(selectedMonth, "MM").format("MMMM")} {selectedYear}.
-        </p>
-      ) : (
-        <table className="attendance-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {getAllDaysOfMonth().map((record, index) => (
-              <tr key={index}>
-                <td>{moment(record.date).format("YYYY-MM-DD")}</td>
-                <td>{record.status}</td>
+      <div className="attendance-table-container">
+        <div className="scrollable-table">
+          <table className="attendance-detail-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+            </thead>
+            <tbody>
+              {getAllDaysOfMonth().map((record, index) => (
+                <tr key={index}>
+                  <td>{moment(record.date).format("YYYY-MM-DD")}</td>
+                  <td>{record.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
