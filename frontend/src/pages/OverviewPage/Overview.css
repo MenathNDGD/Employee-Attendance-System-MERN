@@ -66,13 +66,16 @@
 }
 
 .attendance-table th,
-.attendance-table td {
+.attendance-table td,
+.attendance-detail-table th,
+.attendance-detail-table td {
   padding: 10px;
   text-align: center;
   border: none;
 }
 
-.attendance-table th {
+.attendance-table th,
+.attendance-detail-table th {
   border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -96,21 +99,50 @@
   margin-bottom: 5px;
 }
 
-.attendance-table::-webkit-scrollbar {
+.attendance-table-container {
+  margin-top: 25px;
+  max-width: 1400px;
+  max-height: 380px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 30px 40px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(50px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.attendance-detail-table {
+  margin-top: -3%;
+  max-height: 380px;
+  overflow-y: auto;
+  max-width: 1400px;
+  width: 100%;
+  padding: 30px 40px;
+  backdrop-filter: blur(50px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.attendance-table-container .scrollable-table {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.scrollable-table::-webkit-scrollbar {
   width: 8px;
 }
 
-.attendance-table::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.attendance-table::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.2);
+.scrollable-table::-webkit-scrollbar-track {
+  background: #f1f1f1;
   border-radius: 4px;
 }
 
-.attendance-table::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+.scrollable-table::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.scrollable-table::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 @media (max-width: 768px) {
