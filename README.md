@@ -38,7 +38,7 @@
 
 ## <a name="introduction">🤖 Introduction</a>
 
-The Employee Attendance System is built with React.js, Node.js, and MySQL to track attendance efficiently. Key features include user authentication, role management, check-in/out, automated work hour calculation, real-time tracking, and detailed reports, ensuring seamless workforce management and reducing manual workload.
+The Employee Attendance System is built with React.js, Node.js, and MongoDB to track attendance efficiently. Key features include user authentication, role management, check-in/out, automated work hour calculation, real-time tracking, and detailed reports, ensuring seamless workforce management and reducing manual workload.
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
@@ -118,9 +118,9 @@ Employee-Attendance-System-MERN/
 │   │   │       └── Register.jsx        # User Registration React Component
 │   │   ├── App.js                      # Main React Component
 │   │   ├── index.css                   # Global Styles
-│   │   └── index.js                    # React DOM Renderer  
-│   ├── package-lock.json               # Packages & Dependencies                       
-│   └── package.json                    # Project Installed Packages & Dependencies                      
+│   │   └── index.js                    # React DOM Renderer
+│   ├── package-lock.json               # Packages & Dependencies
+│   └── package.json                    # Project Installed Packages & Dependencies
 └── nonRelatedAssets/                   # Assets for the GitHub Repo (Non-related to the Project)
 ```
 
